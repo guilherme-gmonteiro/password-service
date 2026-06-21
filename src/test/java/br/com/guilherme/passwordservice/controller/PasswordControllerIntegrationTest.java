@@ -1,0 +1,75 @@
+package br.com.guilherme.passwordservice.controller;
+
+import static org.junit.jupiter.params.provider.Arguments.arguments;
+
+import java.util.stream.Stream;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.webtestclient.autoconfigure.AutoConfigureWebTestClient;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.reactive.server.WebTestClient;
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureWebTestClient
+class PasswordControllerIntegrationTest {
+
+    private static final String ENDPOINT = "/password/validate";
+
+    @Autowired
+    private WebTestClient webTestClient;
+
+
+    static Stream<Arguments> passwords() {
+        return Stream.of(
+                arguments("AbcDe1!@#", true,  "senha válida completa"),
+                arguments("Ab1!",      false, "curta demais"),
+                arguments("abcde1!@#", false, "sem maiúscula"),
+                arguments("ABCDE1!@#", false, "sem minúscula"),
+                arguments("AbcDefg!@", false, "sem dígito"),
+                arguments("AbcDe1234", false, "sem caractere especial"),
+                arguments("AAbcD1!@#", false, "caractere repetido"),
+                arguments("AbcD 1!@#", false, "com espaço em branco")
+        );
+    }
+
+    @ParameterizedTest(name = "{2} -> valid={1}")
+    @MethodSource("passwords")
+    void shouldValidatePasswordThroughHttp(String password, boolean expectedValid, String description) {
+        webTestClient.post()
+                .uri(ENDPOINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(new PasswordRequest(password))
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$.valid").isEqualTo(expectedValid);
+    }
+
+    @Test
+    void shouldRejectMalformedJson() {
+        webTestClient.post()
+                .uri(ENDPOINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue("{\"password\": ")
+                .exchange()
+                .expectStatus().isBadRequest();
+    }
+
+    @Test
+    void shouldHandleNullPassword() {
+        webTestClient.post()
+                .uri(ENDPOINT)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(new PasswordRequest(null))
+                .exchange()
+                .expectStatus().isBadRequest();
+    }
+
+    record PasswordRequest(String password) {
+    }
+}
