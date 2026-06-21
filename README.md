@@ -16,6 +16,9 @@ Organizei as validações com um Specification Pattern, muito parecido com a Str
 
 Esta abordagem também permitiu manter classes limpas e ajudou a respeitar o SOLID.
 
+Normalmente uma API como esta, retornaria o motivo da falha, não só o booleano indicando se o teste passou ou não, mas neste caso achei melhor seguir a especificação de como a resposta deveria ser...
+em caso da mensagem ser necessária, eu adicionaria ela junto com o booleano, na rule da mensagem, e retornaria um objeto com todos os erros gerados.
+
 Os testes unitarios e integrados foram criados utilizando abordagens mais claras e com testes parametrizados, evitando duplicidade de checagens ou de código sempre que possivel, testei todos os cenários que imaginei que seriam possiveis para cada RULE.
 ## Instruções
 

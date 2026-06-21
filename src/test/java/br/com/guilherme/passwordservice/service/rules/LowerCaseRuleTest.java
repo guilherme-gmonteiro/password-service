@@ -19,11 +19,11 @@ class LowerCaseRuleTest {
 
     static Stream<Arguments> passwords() {
         return Stream.of(
-                arguments("ABCDe123!", true,  "uma minúscula"),
-                arguments("ABcde123!", true,  "múltiplas minúsculas"),
-                arguments("ABCDE123!", false, "sem minúscula (com dígitos e especial)"),
-                arguments("ABCDEFGHI", false, "tudo maiúsculo"),
-                arguments("",          false, "string vazia")
+                arguments("ABCDe123!", true,  "one lowercase letter"),
+                arguments("ABcde123!", true,  "multiple lowercase letters"),
+                arguments("ABCDE123!", false, "missing lowercase letter (with digits and special character)"),
+                arguments("ABCDEFGHI", false, "all uppercase"),
+                arguments("",          false, "empty string")
         );
     }
 

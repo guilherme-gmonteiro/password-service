@@ -19,14 +19,14 @@ class RepeatedCharsRuleTest {
 
     static Stream<Arguments> passwords() {
         return Stream.of(
-                arguments("Abbcde12!", false, "minúscula repetida (adjacente)"),
-                arguments("AAcde12!@", false, "maiúscula repetida (adjacente)"),
-                arguments("Abcde112!", false, "dígito repetido"),
-                arguments("Abcde12!!", false, "especial repetido"),
-                arguments("abcdea12!", false, "repetição NÃO-adjacente"),
-                arguments("AbcDe12!@", true,  "todos os caracteres únicos"),
-                arguments("Aabcde1!@", true,  "'A' e 'a' são distintos (case-sensitive)"),
-                arguments("",          true,  "vazia (vacuamente sem repetição)")
+                arguments("Abbcde12!", false, "repeated lowercase letter (adjacent)"),
+                arguments("AAcde12!@", false, "repeated uppercase letter (adjacent)"),
+                arguments("Abcde112!", false, "repeated digit"),
+                arguments("Abcde12!!", false, "repeated special character"),
+                arguments("abcdea12!", false, "non-adjacent repetition"),
+                arguments("AbcDe12!@", true,  "all characters are unique"),
+                arguments("Aabcde1!@", true,  "'A' and 'a' are distinct (case-sensitive)"),
+                arguments("",          true,  "empty string (vacuously no repetition)")
         );
     }
 

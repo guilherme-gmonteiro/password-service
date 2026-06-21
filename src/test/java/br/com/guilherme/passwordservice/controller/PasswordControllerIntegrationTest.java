@@ -26,14 +26,14 @@ class PasswordControllerIntegrationTest {
 
     static Stream<Arguments> passwords() {
         return Stream.of(
-                arguments("AbcDe1!@#", true,  "senha válida completa"),
-                arguments("Ab1!",      false, "curta demais"),
-                arguments("abcde1!@#", false, "sem maiúscula"),
-                arguments("ABCDE1!@#", false, "sem minúscula"),
-                arguments("AbcDefg!@", false, "sem dígito"),
-                arguments("AbcDe1234", false, "sem caractere especial"),
-                arguments("AAbcD1!@#", false, "caractere repetido"),
-                arguments("AbcD 1!@#", false, "com espaço em branco")
+                arguments("AbcDe1!@#", true,  "valid complete password"),
+                arguments("Ab1!",      false, "too short"),
+                arguments("abcde1!@#", false, "missing uppercase letter"),
+                arguments("ABCDE1!@#", false, "missing lowercase letter"),
+                arguments("AbcDefg!@", false, "missing digit"),
+                arguments("AbcDe1234", false, "missing special character"),
+                arguments("AAbcD1!@#", false, "repeated character"),
+                arguments("AbcD 1!@#", false, "contains whitespace")
         );
     }
 

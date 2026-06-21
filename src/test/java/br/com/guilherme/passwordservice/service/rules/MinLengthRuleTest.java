@@ -16,11 +16,11 @@ class MinLengthRuleTest {
 
     static Stream<Arguments> passwords() {
         return Stream.of(
-                arguments("Abc1!xy",     false, "7 caracteres (abaixo)"),
-                arguments("Abcde12!",    false, "8 caracteres (um abaixo do limite)"),
-                arguments("Abcde123!",   true,  "9 caracteres (exatamente no limite)"),
-                arguments("Abcde12345!", true,  "11 caracteres (acima)"),
-                arguments("",            false, "string vazia")
+                arguments("Abc1!xy",     false, "7 characters (below the minimum)"),
+                arguments("Abcde12!",    false, "8 characters (one below the minimum)"),
+                arguments("Abcde123!",   true,  "9 characters (exactly the minimum)"),
+                arguments("Abcde12345!", true,  "11 characters (above the minimum)"),
+                arguments("",            false, "empty string")
         );
     }
 

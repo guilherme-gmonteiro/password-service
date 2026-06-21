@@ -18,13 +18,13 @@ class WhitespaceRuleTest {
 
     static Stream<Arguments> passwords() {
         return Stream.of(
-                arguments("Abcde 1!@",  false, "espaço no meio"),
-                arguments("Abcde1!@\t", false, "tab"),
-                arguments("Abcde1!@\n", false, "newline"),
-                arguments(" Abcde1!@",  false, "espaço no início"),
-                arguments("Abcde1!@ ",  false, "espaço no fim"),
-                arguments("Abcde12!@",  true,  "sem whitespace"),
-                arguments("",           true,  "vazia (sem whitespace)")
+                arguments("Abcde 1!@",  false, "space in the middle"),
+                arguments("Abcde1!@\t", false, "tab character"),
+                arguments("Abcde1!@\n", false, "newline character"),
+                arguments(" Abcde1!@",  false, "leading space"),
+                arguments("Abcde1!@ ",  false, "trailing space"),
+                arguments("Abcde12!@",  true,  "no whitespace"),
+                arguments("",           true,  "empty string (no whitespace)")
         );
     }
 

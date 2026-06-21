@@ -18,12 +18,12 @@ class HasDigitRuleTest {
 
     static Stream<Arguments> passwords() {
         return Stream.of(
-                arguments("1Password", true,  "dígito no início"),
-                arguments("Pass1word", true,  "dígito no meio"),
-                arguments("Password9", true,  "dígito no fim"),
-                arguments("123456789", true,  "apenas dígitos"),
-                arguments("Password",  false, "sem dígito"),
-                arguments("",          false, "string vazia")
+                arguments("1Password", true,  "digit at the beginning"),
+                arguments("Pass1word", true,  "digit in the middle"),
+                arguments("Password9", true,  "digit at the end"),
+                arguments("123456789", true,  "digits only"),
+                arguments("Password",  false, "missing digit"),
+                arguments("",          false, "empty string")
         );
     }
 

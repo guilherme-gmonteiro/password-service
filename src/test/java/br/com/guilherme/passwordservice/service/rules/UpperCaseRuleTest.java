@@ -19,11 +19,11 @@ class UpperCaseRuleTest {
 
     static Stream<Arguments> passwords() {
         return Stream.of(
-                arguments("Abcde123!", true,  "uma maiúscula"),
-                arguments("ABCde123!", true,  "múltiplas maiúsculas"),
-                arguments("abcde123!", false, "sem maiúscula"),
-                arguments("abcdefghi", false, "tudo minúsculo"),
-                arguments("",          false, "string vazia")
+                arguments("Abcde123!", true,  "one uppercase letter"),
+                arguments("ABCde123!", true,  "multiple uppercase letters"),
+                arguments("abcde123!", false, "missing uppercase letter"),
+                arguments("abcdefghi", false, "all lowercase"),
+                arguments("",          false, "empty string")
         );
     }
 
